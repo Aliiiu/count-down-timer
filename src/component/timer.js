@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import classes from './timer.module.css';
 
 const Timer = () => {
-  const [timer, setTimer] = useState(300);
+  const [timer, setTimer] = useState(5);
   const [timerMinutes, setTimerMinutes] = useState('00');
   const [timerSecs, setTimerSecs] = useState('00');
   const [timerIsValid, setTimerIsValid] = useState(null);
@@ -19,7 +19,6 @@ const Timer = () => {
     setTimerSecs(time[1])
   }, [timer])
 
-
   function toggleCountDown() {
     if (isActive) {
       // started mode
@@ -32,11 +31,17 @@ const Timer = () => {
       // create accurate date timer with date
       const newIntervalId = setInterval(() => {
         setTimer(prevTime => {
-          let newTime = prevTime - 1
-          let time = secondsToTime(newTime)
-          setTimerMinutes(time[0])
-          setTimerSecs(time[1])
-          return newTime
+          let newTime = prevTime - 1;
+          if (newTime === 0) {
+            handleResetTimer()
+          }
+          else {
+            let time = secondsToTime(newTime)
+            setTimerMinutes(time[0])
+            setTimerSecs(time[1])
+            return newTime
+          }
+          
         })
       }, 1000)
       setTimerIsValid(newIntervalId)
@@ -49,7 +54,7 @@ const Timer = () => {
       clearInterval(timerIsValid)
     }
     setTimerIsValid(null)
-    setTimer(300)
+    setTimer(5)
   }
 
   // zero paddings if < 10
