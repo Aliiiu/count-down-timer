@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import classes from './timer.module.css';
 
 const Timer = () => {
   const [timer, setTimer] = useState(300);
@@ -60,14 +61,16 @@ const Timer = () => {
     }
   }
   return (
-    <div className="timer">
-      <p className="label">5 Minutes Timer</p>
-      <div className="time-left">
-        {formatDisplayTime(timerMinutes)}: {formatDisplayTime(timerSecs)}
+    <div className={classes.timer}>
+      <div>
+        <h1 className="label">5 Minutes Timer</h1>
+        <div className={classes['time-left']}>
+          {formatDisplayTime(timerMinutes)}: {formatDisplayTime(timerSecs)}
+        </div>
       </div>
-      <div className="timer-control">
-        <button className='start-stop' onClick={(e) => toggleCountDown()}>{isActive ? 'Stop' : 'Start'}</button>
-        <button onClick={handleResetTimer}>Reset</button>
+      <div className={classes["timer-control"]}>
+        <button className={classes['start-stop']} onClick={(e) => toggleCountDown()}>{isActive ? 'Stop' : 'Start'}</button>
+        <button onClick={handleResetTimer} className={classes.reset}>Reset</button>
       </div>
     </div>
   )
