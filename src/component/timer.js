@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import classes from './timer.module.css';
 
 const Timer = () => {
-  const [timer, setTimer] = useState(5);
+  const [timer, setTimer] = useState(300);
   const [timerMinutes, setTimerMinutes] = useState('00');
   const [timerSecs, setTimerSecs] = useState('00');
   const [timerIsValid, setTimerIsValid] = useState(null);
@@ -54,7 +54,7 @@ const Timer = () => {
       clearInterval(timerIsValid)
     }
     setTimerIsValid(null)
-    setTimer(5)
+    setTimer(300)
   }
 
   // zero paddings if < 10
